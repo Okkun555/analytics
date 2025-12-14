@@ -267,6 +267,7 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
+    react_router_rails_spa (0.1.2)
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
@@ -399,6 +400,7 @@ DEPENDENCIES
   propshaft
   puma (>= 5.0)
   rails (~> 8.1.1)
+  react_router_rails_spa
   rubocop-rails-omakase
   selenium-webdriver
   solid_cable

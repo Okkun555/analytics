@@ -1,16 +1,15 @@
 import { reactRouter } from "@react-router/dev/vite";
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-const railsEnv = process.env.RAILS_ENV || 'development'
+const railsEnv = process.env.RAILS_ENV || "development";
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  plugins: [reactRouter(), tsconfigPaths()],
   build: {
     assetsDir: "assets",
     // Set to true if you want sourcemaps in your build.
-    sourcemap: (["test", "development"].indexOf(railsEnv) !== -1) ? true : false,
+    sourcemap: ["test", "development"].indexOf(railsEnv) !== -1 ? true : false,
   },
   // As also defined in react-router.config.ts, this tells Vite that
   // the app is served from the "/react/" sub-path.

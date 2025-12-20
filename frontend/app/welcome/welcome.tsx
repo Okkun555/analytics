@@ -1,32 +1,10 @@
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
-import railsLogo from "./rails-logo.svg";
-
 export function Welcome() {
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center min-h-0">
         <header className="flex flex-row items-baseline gap-9 max-w-[100vw]">
-          <div className="w-[300px]">
-            <img
-              src={logoLight}
-              alt="React Router"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="React Router"
-              className="hidden w-full dark:block"
-            />
-          </div>
+          <div className="w-[300px]"></div>
           <div className="text-5xl text-gray-500 font-bold">on</div>
-          <div className="text-red-500 w-[300px]">
-            <img
-              src={railsLogo}
-              alt="Ruby on Rails"
-              className="block w-full"
-            />
-          </div>
         </header>
         <div className="mt-12 text-2xl text-gray-600">with the</div>
         <h1 className="mt-6 text-3xl font-bold">react_router_rails_spa gem</h1>

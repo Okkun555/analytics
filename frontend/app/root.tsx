@@ -6,24 +6,18 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import {
+  ThemeProvider,
+  CssBaseline,
+  Container,
+  type Theme,
+} from "@mui/material";
 
 import type { Route } from "./+types/root";
 import "./app.css";
 import theme from "./libs/mui/theme";
-
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
+import { Header } from "./components/header";
+import styled from "@emotion/styled";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -37,7 +31,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {children}
+          <Header />
+          <MainContainer theme={theme}>{children}</MainContainer>
         </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
@@ -78,3 +73,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
+
+const MainContainer = styled(Container)(({ theme }: { theme: Theme }) => ({
+  margin: theme.spacing(1, 0),
+}));

@@ -1,3 +1,1 @@
-export default function Dashboard() {
-  return <>test</>;
-}
+export { Dashboard as default } from "../features/dashboard";

@@ -42,11 +42,15 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails"
+  gem "faker"
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "pry-rails"
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
+  gem "ruby-lsp"
+  gem "ruby-lsp-rspec"
 end
 
 group :test do

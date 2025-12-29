@@ -1,0 +1,25 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        name: "名前"
+        birthday: "生年月日"
+        sex: "性別"
+    errors:
+      models:
+        user:
+          attributes:
+            birthday:
+              greater_than_or_equal_to: "は%{count}以降の日付を入力してください"
+              less_than_or_equal_to: "は%{count}以前の日付を入力してください"
+            sex:
+              inclusion: "は男性または女性を入力してください"
+
+  activemodel:
+    errors:
+      messages:
+        blank: "を入力してください"
+        too_long: "%{count}文字以内で入力してください"
+        invalid: "が不正な値です"

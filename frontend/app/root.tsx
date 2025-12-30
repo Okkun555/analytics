@@ -32,7 +32,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Header />
-          <MainContainer theme={theme}>{children}</MainContainer>
+          <MainContainer maxWidth={false} theme={theme}>
+            {children}
+          </MainContainer>
         </ThemeProvider>
         <ScrollRestoration />
         <Scripts />

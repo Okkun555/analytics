@@ -26,7 +26,7 @@ export const Tab: FC<TabProps> = ({ tabItems, currentValue, handleChange }) => (
     }}
   >
     {tabItems.map((item) => (
-      <MuiTab label={item.label} />
+      <MuiTab label={item.label} key={item.value} />
     ))}
   </Tabs>
 );

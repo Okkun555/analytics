@@ -4,5 +4,10 @@ export type UserFormValues = {
   name: string;
   birthday: string;
   sex: SexType;
-  occupationId: number;
+  occupationId: number | null;
+};
+
+export type Occupation = {
+  id: number;
+  name: string;
 };

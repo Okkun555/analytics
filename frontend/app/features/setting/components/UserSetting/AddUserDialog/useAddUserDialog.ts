@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import type { UserFormValues } from "../../../types";
 import { useCallback } from "react";
+import { postUsers } from "~/repositories/usersRepository";
 
 export const useAddUserDialog = () => {
   const { control, handleSubmit } = useForm<UserFormValues>({
@@ -8,12 +9,16 @@ export const useAddUserDialog = () => {
       name: "",
       birthday: "1990-01-01",
       sex: "man",
+      occupationId: null,
     },
   });
 
-  const onSubmit = useCallback((data: UserFormValues) => {
-    console.log(data);
+  const { trigger } = postUsers();
+  const onSubmit = useCallback(async (data: UserFormValues) => {
+    await trigger({
+      user: { ...data },
+    });
   }, []);
 
-  return { fetchOccupations, control, handleSubmit, onSubmit };
+  return { control, handleSubmit, onSubmit };
 };

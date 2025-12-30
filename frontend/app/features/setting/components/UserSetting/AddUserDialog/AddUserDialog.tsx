@@ -15,6 +15,7 @@ import {
 import type { FC } from "react";
 import { useAddUserDialog } from "./useAddUserDialog";
 import { Controller } from "react-hook-form";
+import { fetchOccupations } from "~/repositories/occupationsRepository";
 
 type AddUserDialogProps = {
   isOpen: boolean;
@@ -25,6 +26,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   isOpen,
   handleClose,
 }) => {
+  const { occupations, isLoading } = fetchOccupations();
   const { control, handleSubmit, onSubmit } = useAddUserDialog();
 
   return (
@@ -77,6 +79,31 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                     <Select {...field} id="sex">
                       <MenuItem value="man">男性</MenuItem>
                       <MenuItem value="woman">女性</MenuItem>
+                    </Select>
+                  </FormControl>
+                )}
+              />
+
+              <Controller
+                name="occupationId"
+                control={control}
+                render={({ field }) => (
+                  <FormControl>
+                    <InputLabel id="occupation-id-label">職種</InputLabel>
+                    <Select
+                      {...field}
+                      id="occupation"
+                      value={field.value ?? ""}
+                      onChange={(e) => {
+                        const val = (e.target as HTMLInputElement).value;
+                        field.onChange(val === "" ? null : Number(val));
+                      }}
+                    >
+                      {occupations?.map((occupation) => (
+                        <MenuItem value={occupation.id} key={occupation.id}>
+                          {occupation.name}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 )}

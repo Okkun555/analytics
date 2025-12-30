@@ -1,4 +1,4 @@
-class Api::OccupationsController < ApplicationController
+class Api::OccupationsController < Api::BaseController
   def index
     occupations = Occupation.all.order(:id)
 

@@ -45,7 +45,6 @@ export default defineConfig({
         // rewrite rule will not be necessary.
         //
         // Also see `frontend/app/utilities/proxy.ts` for how we handle this inside React.
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

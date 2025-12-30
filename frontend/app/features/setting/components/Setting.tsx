@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { useSetting } from "./useSetting";
 import {
   Box,
@@ -12,8 +12,23 @@ import {
 import styled from "@emotion/styled";
 import theme from "~/libs/mui/theme";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { AddUserDialog } from "./AddUserDialog";
+import { AddUserDialog } from "./UserSetting/AddUserDialog";
+import { Tab, type TabItems } from "~/components/tab/Tab";
+import { UserSetting } from "./UserSetting";
+
 export const Setting: FC = () => {
+  const settingMenuItems: TabItems = [
+    { label: "ユーザー管理", value: 0 },
+    { label: "資産データ", value: 1 },
+  ];
+
+  const [value, setValue] = useState<TabItems[number]["value"]>(0);
+
+  const handleChange = (
+    _e: React.SyntheticEvent,
+    newValue: TabItems[number]["value"]
+  ) => setValue(newValue);
+
   const {
     isOpenImportDialog,
     handleOpenImportDialog,
@@ -23,12 +38,15 @@ export const Setting: FC = () => {
     handleCloseAddUserDialog,
   } = useSetting();
 
-  // TODO: 上部にタブを置いて設定項目ごとに切り替えれるようにする
-  // ヘッダー上部にメニューリンクを置く（Qiitaみたいなやつ）
-
   return (
     <>
-      <ContentContainer theme={theme}>
+      <Tab
+        tabItems={settingMenuItems}
+        currentValue={value}
+        handleChange={handleChange}
+      />
+      {value === 0 && <UserSetting />}
+      {/* <ContentContainer theme={theme}>
         <Box sx={{ display: "flex", alignContent: "flex-end" }}>
           <Icon>
             <SettingsIcon />
@@ -66,7 +84,7 @@ export const Setting: FC = () => {
       <AddUserDialog
         isOpen={isOpenAddUserDialog}
         handleClose={handleCloseAddUserDialog}
-      />
+      /> */}
     </>
   );
 };

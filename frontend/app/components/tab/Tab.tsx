@@ -18,10 +18,11 @@ export const Tab: FC<TabProps> = ({ tabItems, currentValue, handleChange }) => (
   <Tabs
     value={currentValue}
     onChange={handleChange}
-    indicatorColor="secondary"
+    indicatorColor="primary"
     sx={{
       color: theme.palette.secondary.contrastText,
       "&.Mui-selected": { color: theme.palette.secondary.contrastText },
+      margin: theme.spacing(2, 0),
     }}
   >
     {tabItems.map((item) => (

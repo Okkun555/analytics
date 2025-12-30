@@ -6,18 +6,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import {
-  ThemeProvider,
-  CssBaseline,
-  Container,
-  type Theme,
-} from "@mui/material";
+import { ThemeProvider, CssBaseline, Container } from "@mui/material";
 
 import type { Route } from "./+types/root";
 import "./app.css";
 import theme from "./libs/mui/theme";
 import { Header } from "./components/header";
-import styled from "@emotion/styled";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -32,9 +26,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Header />
-          <MainContainer maxWidth={false} theme={theme}>
-            {children}
-          </MainContainer>
+          <Container maxWidth={false}>{children}</Container>
         </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
@@ -75,7 +67,3 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
-
-const MainContainer = styled(Container)(({ theme }: { theme: Theme }) => ({
-  margin: theme.spacing(1, 0),
-}));

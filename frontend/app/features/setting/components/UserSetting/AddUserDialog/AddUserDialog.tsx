@@ -4,6 +4,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Select,
   Stack,
   TextField,
@@ -22,7 +25,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   isOpen,
   handleClose,
 }) => {
-  const { control, handleSubmit } = useAddUserDialog();
+  const { control, handleSubmit, onSubmit } = useAddUserDialog();
 
   return (
     <Dialog open={isOpen} onClose={handleClose} maxWidth="xl">
@@ -35,7 +38,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             ユーザー毎に資産推移を確認したり、全ユーザーの総資産を管理することも可能です。
           </Typography>
 
-          <form onSubmit={handleSubmit(() => console.log())}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
               <Controller
                 name="name"
@@ -60,6 +63,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                     type="date"
                     fullWidth
                     variant="outlined"
+                    label="生年月日"
                   />
                 )}
               />
@@ -68,7 +72,13 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                 name="sex"
                 control={control}
                 render={({ field }) => (
-                  <Select {...field} id="sex" label="性別"></Select>
+                  <FormControl>
+                    <InputLabel id="sex-label">性別</InputLabel>
+                    <Select {...field} id="sex">
+                      <MenuItem value="man">男性</MenuItem>
+                      <MenuItem value="woman">女性</MenuItem>
+                    </Select>
+                  </FormControl>
                 )}
               />
 

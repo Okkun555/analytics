@@ -9,7 +9,7 @@ export const fetchOccupations = () => {
     fetcher
   );
   return {
-    occupations: data,
+    occupations: data ?? [],
     isLoading,
   };
 };

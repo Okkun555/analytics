@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   namespace :api do
-    resources :users, only: %i[create]
+    resources :users, only: %i[index create]
     resources :occupations, only: %i[index]
   end
 end

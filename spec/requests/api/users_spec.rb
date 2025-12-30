@@ -1,6 +1,52 @@
 require "rails_helper"
 
 RSpec.describe "Api::Users", type: :request do
+  before do
+    # MEMO: 生年月日のテストの為、日付を固定する（全てのテストで固定しないとエラーとなったのでここで指定）
+    travel_to(Time.zone.local(2025, 11, 30))
+  end
+
+  describe "GET /api/users" do
+    context "データが存在する場合" do
+      let(:occupation) { create(:occupation) }
+      let!(:user_1) { create(:user, occupation:) }
+      let!(:user_2) { create(:user, occupation:) }
+
+      it "200とユーザー一覧を返却する" do
+        subject
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to match({
+          "data" => [
+            {
+              "id" => user_1.id,
+              "name" => user_1.name,
+              "age" => user_1.age,
+              "sex" => user_1.sex,
+              "occupation" => occupation.name
+            },
+            {
+              "id" => user_2.id,
+              "name" => user_2.name,
+              "age" => user_2.age,
+              "sex" => user_2.sex,
+              "occupation" => occupation.name
+            }
+          ]
+        })
+      end
+    end
+
+    context "データが存在しない場合" do
+      it "200と空配列を返す" do
+        subject
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to match({
+          "data" => []
+        })
+      end
+    end
+  end
+
   describe "POST /api/users" do
     let(:params) { { user: { name:, birthday:, sex:, occupation_id: } } }
     let(:name) { "佐藤" }
@@ -8,10 +54,6 @@ RSpec.describe "Api::Users", type: :request do
     let(:sex) { "man" }
     let(:occupation) { create(:occupation) }
     let(:occupation_id) { occupation.id }
-
-    before do
-      travel_to(Time.zone.local(2025, 11, 30))
-    end
 
     context "パラメータが正常な場合" do
       it "201を返却し、レコードが作成される" do

@@ -4,6 +4,7 @@ const path = {
   },
   // 管理ユーザー
   users: {
+    fetch: "/users",
     add: "/users",
   },
 };

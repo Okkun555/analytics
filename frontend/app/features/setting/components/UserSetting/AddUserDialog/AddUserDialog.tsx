@@ -16,6 +16,8 @@ import type { FC } from "react";
 import { useAddUserDialog } from "./useAddUserDialog";
 import { Controller } from "react-hook-form";
 import { fetchOccupations } from "~/repositories/occupationsRepository";
+import type { UserFormValues } from "~/features/setting/types";
+import { postUsers } from "~/repositories/usersRepository";
 
 type AddUserDialogProps = {
   isOpen: boolean;
@@ -27,7 +29,16 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   handleClose,
 }) => {
   const { occupations, isLoading } = fetchOccupations();
-  const { control, handleSubmit, onSubmit } = useAddUserDialog();
+  const { control, handleSubmit, reset } = useAddUserDialog();
+
+  const { trigger } = postUsers();
+  const onSubmit = async (data: UserFormValues) => {
+    await trigger({
+      user: { ...data },
+    });
+    reset();
+    handleClose();
+  };
 
   return (
     <Dialog open={isOpen} onClose={handleClose} maxWidth="xl">

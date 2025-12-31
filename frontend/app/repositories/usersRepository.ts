@@ -1,6 +1,6 @@
 import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
-import type { User } from "~/features/setting/types";
+import type { User } from "~/types";
 
 import { fetcher, postRequest } from "~/libs/api/fetcher";
 import path from "~/libs/api/path";

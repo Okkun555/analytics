@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import type { UserFormValues } from "../../../types";
+import type { UserFormValues } from "../../../../../types";
 
 export const useAddUserDialog = () => {
   const { control, handleSubmit, reset } = useForm<UserFormValues>({

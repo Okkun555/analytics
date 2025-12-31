@@ -16,7 +16,7 @@ import type { FC } from "react";
 import { useAddUserDialog } from "./useAddUserDialog";
 import { Controller } from "react-hook-form";
 import { fetchOccupations } from "~/repositories/occupationsRepository";
-import type { UserFormValues } from "~/features/setting/types";
+import type { UserFormValues } from "~/types";
 import { postUsers } from "~/repositories/usersRepository";
 
 type AddUserDialogProps = {

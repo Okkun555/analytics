@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import type { Occupation } from "~/features/setting/types";
+import type { Occupation } from "~/types";
 import { fetcher } from "~/libs/api/fetcher";
 import path from "~/libs/api/path";
 

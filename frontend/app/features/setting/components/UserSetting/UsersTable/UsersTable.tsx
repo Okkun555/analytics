@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@mui/material";
 import type { FC } from "react";
-import type { User } from "~/features/setting/types";
+import type { User } from "~/types";
 
 type UsersTableProps = {
   users: Array<User>;

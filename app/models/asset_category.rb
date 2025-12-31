@@ -1,0 +1,3 @@
+class AssetCategory < ApplicationRecord
+  validates :name, presence: true, length: { maximum: 100 }, unique: true
+end

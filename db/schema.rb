@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_27_024757) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_31_113516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "asset_balances", force: :cascade do |t|
+    t.integer "amount", default: 0, null: false, comment: "合計額"
+    t.bigint "asset_category_id", null: false, comment: "資産カテゴリID"
+    t.datetime "created_at", null: false
+    t.date "date", null: false, comment: "対象月"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false, comment: "ユーザーID"
+    t.index ["asset_category_id"], name: "index_asset_balances_on_asset_category_id"
+    t.index ["user_id", "date", "asset_category_id"], name: "index_asset_balances_on_user_id_and_date_and_asset_category_id", unique: true
+    t.index ["user_id", "date"], name: "index_asset_balances_on_user_id_and_date"
+    t.index ["user_id"], name: "index_asset_balances_on_user_id"
+  end
+
+  create_table "asset_categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", limit: 100, null: false, comment: "資産カテゴリ名"
+    t.datetime "updated_at", null: false
+  end
 
   create_table "occupations", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -31,5 +50,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_27_024757) do
     t.index ["occupation_id"], name: "index_users_on_occupation_id"
   end
 
+  add_foreign_key "asset_balances", "asset_categories"
+  add_foreign_key "asset_balances", "users"
   add_foreign_key "users", "occupations"
 end

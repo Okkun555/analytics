@@ -9,8 +9,10 @@ class Api::AssetBalancesController < Api::BaseController
     begin
       AssetBalanceImportService.call(upload_file, user_id)
       render json: { message: "インポートに成功しました" }
+    rescue AssetBalanceImportService::InvalidCSVFormat => e
+      render_unprocessable_entity(e.messages)
     rescue => e
-      render json: { errors: [ "エラーが発生しました: #{e.message}" ] }, status: :unprocessable_entity
+      render_unprocessable_entity([ "予期せぬエラーが発生しました: #{e.message}" ])
     end
   end
 

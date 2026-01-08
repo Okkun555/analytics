@@ -5,4 +5,11 @@ module RenderHelper
       messages: messages
     }, status: :bad_request
   end
+
+  # 422 Unprocessable Entity
+  def render_unprocessable_entity(messages)
+    render json: {
+      messages: messages
+    }, status: :unprocessable_entity
+  end
 end

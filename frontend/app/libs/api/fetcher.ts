@@ -1,5 +1,5 @@
 import axios from "axios";
-import { camelizeKeys, decamelizeKeys } from "humps";
+import { camelizeKeys, decamelize, decamelizeKeys } from "humps";
 import { baseApiPath } from "~/utilities/proxy";
 import { getCSRFToken } from "~/utilities/csrf";
 
@@ -59,7 +59,8 @@ const appendFormData = (data: any, parentKey = ""): FormData => {
   const addToFormData = (obj: any, prefix = "") => {
     Object.keys(obj).forEach((key) => {
       const value = obj[key];
-      const formKey = prefix ? `${prefix}[${key}]` : key;
+      const snakeKey = decamelize(key);
+      const formKey = prefix ? `${prefix}[${snakeKey}]` : snakeKey;
 
       if (value instanceof File) {
         formData.append(formKey, value);

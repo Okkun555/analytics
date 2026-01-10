@@ -23,6 +23,7 @@ import type { ImportFormValues, User } from "~/types";
 import theme from "~/libs/mui/theme";
 import { useImportDialog } from "./useImportDialog";
 import type React from "react";
+import { postAssetBalancesBulkImport } from "~/repositories/assetBalancesRepository";
 
 type ImportDialogProps = {
   users: User[];
@@ -37,8 +38,12 @@ export const ImportDialog: FC<ImportDialogProps> = ({
 }) => {
   const { control, handleSubmit, reset } = useImportDialog();
 
+  const { trigger } = postAssetBalancesBulkImport();
   const onSubmit = async (data: ImportFormValues) => {
-    console.log(data);
+    await trigger({
+      file: data.file,
+      userId: data.userId,
+    });
     reset();
     handleClose();
   };
@@ -53,7 +58,7 @@ export const ImportDialog: FC<ImportDialogProps> = ({
       <DialogTitle>資産データのインポート</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <Typography component="p">
+          <Typography component="div">
             CSVファイルを利用して、資産データを登録できます。ファイルの形式は以下の通りです。
           </Typography>
         </DialogContentText>
@@ -78,7 +83,7 @@ export const ImportDialog: FC<ImportDialogProps> = ({
         />
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={2} sx={{ marginTop: theme.spacing(2) }}>
-            <Typography component="p" fontWeight="bold">
+            <Typography component="div" fontWeight="bold">
               1.対象の管理ユーザーを選択してください
             </Typography>
 
@@ -87,7 +92,12 @@ export const ImportDialog: FC<ImportDialogProps> = ({
               control={control}
               render={({ field }) => (
                 <FormControl>
-                  <Select {...field} id="user-id" sx={{ width: "30%" }}>
+                  <Select
+                    {...field}
+                    id="user-id"
+                    sx={{ width: "30%" }}
+                    value={field.value ?? ""}
+                  >
                     {users.map((user) => (
                       <MenuItem key={user.id} value={user.id}>
                         {user.name}
@@ -98,7 +108,7 @@ export const ImportDialog: FC<ImportDialogProps> = ({
               )}
             />
 
-            <Typography component="p" fontWeight="bold">
+            <Typography component="div" fontWeight="bold">
               2.CSVファイルを選択してください
             </Typography>
 

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: %i[index create]
     resources :occupations, only: %i[index]
-    resource :asset_balance do
+    resources :asset_balances do
       collection do
         post :bulk_create
       end

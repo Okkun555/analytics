@@ -7,6 +7,10 @@ const path = {
     fetch: "/users",
     add: "/users",
   },
+  // 資産
+  assetBalances: {
+    bulkImport: "/asset_balances/bulk_create",
+  },
 };
 
 export default path;

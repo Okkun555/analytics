@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::AssetBalances", type: :request do
-  describe "POST /api/asset_balance/bulk_create" do
+  describe "POST /api/asset_balances/bulk_create" do
     let(:user) { create(:user) }
     let(:params) { { user_id: user.id, file: csv_file } }
 
